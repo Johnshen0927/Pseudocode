@@ -19,7 +19,7 @@ void ShortestPath_Dijkstra(MGraph G, int v_0, Patharc *P, ShortPathTable *D)
     (*D)[v_0] = 0;  /* v_0至v_0的路径长度为0 */
     final[v_0] = 1; /* V_0到v_0不需要求路径 */
     /* 开始主循环，每次求得v_0到某个v顶点的最短路径 */
-    for (v = 1; v < G.numVertexes; w++)
+    for (v = 1; v < G.numVertexes; v++)
     {
         min = INFINITY;                     /* 当前所知离v_0顶点的最近距离 */
         for (w = 0; w < G.numVertexes; w++) /* 寻找离v_0最近的顶点 */
