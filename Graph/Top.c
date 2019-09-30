@@ -59,3 +59,66 @@ Status ToplogicalSort(GraphAdList GL)
         return OK;
     }
 }
+
+/* 关键路径算法 */
+int *etv, *ltv; /* 事件最早发生时间etv数组，最晚发生时间ltv数组 */
+int *stack2;    /* 存储拓扑序列的栈 */
+int top2;       /* 存储stack2的指针 */
+
+/* 拓扑排序，用于关键路径计算 */
+Status ToplogicalSort(GraphAdjList GL)
+{
+    EdgeNode *e;
+    int i, k, gettop;
+    int top = 0;   /* 用于栈指针下表 */
+    int count = 0; /* 用于统计输出顶点的个数 */
+    int *stack;    /* 建栈，用于将入度为0的顶点入栈 */
+    stack = (int *)malloc(GL->numVertexes * sizeof(int));
+    for (i = 0; i < GL->numVertexes; i++)
+    {
+        if (0 == GL->adjList[i].in)
+        {
+            stack[++top] = i;
+        }
+    }
+    // 优化改进 start
+    top2 = 0;                                           /* 初始化为0 */
+    etv = (int *)malloc(GL->numVertexes * sizeof(int)); /* 事件最早发生时间 */
+    for (i = 0; i < GL->numVertexes; i++)
+    {
+        etv[i] = 0; /* 初始化为0 */
+    }
+    stack2 = (int *)malloc(GL->numVertexes * sizeof(int)); /* 初始化 */
+    // 优化改进 end
+    while (top != 0)
+    {
+        gettop = stack[top--];
+        count++;
+        // 优化改进 start
+        stack2[++top2] = gettop; /* 将弹出的顶点序号压入拓扑序列的栈 */
+        // 优化改进 end
+
+        for (e = GL->adjList[gettop].firstedge; e; e = e->next)
+        {
+            k = e->adjvex;
+            if (!(--GL->adjList[k].in))
+            {
+                stack[++top] = k;
+            }
+            // 优化改进 start
+            if ((etv[gettop] + e->weight) > etv[k]) /* 计算求出各顶点事件最早发生的时间值 */
+            {
+                etv[k] = etv[gettop] + e->weight;
+            }
+            // 优化改进 end
+        }
+    }
+    if (count < GL->numVertexes)
+    {
+        return ERROR;
+    }
+    else
+    {
+        return OK;
+    }
+}
