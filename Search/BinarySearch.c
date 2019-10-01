@@ -7,8 +7,10 @@ int Binary_Search(int *a, int n, int key)
     high = n; /* 定义最高下标为记录末位 */
     while (low <= high)
     {
-        mid = (low + high) / 2; /* 折半 */
-        if (key < a[mid])       /* 若查找值比中值小 */
+        mid = (low + high) / 2; /* 折半算法 */
+        // mid = low + (high - low) * (key -a[low])/(a[high] - a[low]); /* 插值算法 */
+        
+        if (key < a[mid]) /* 若查找值比中值小 */
         {
             high = mid - 1; /* 最高值调整为中位值-1 */
         }
