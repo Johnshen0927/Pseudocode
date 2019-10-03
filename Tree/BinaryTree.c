@@ -86,18 +86,43 @@ void InThreading(BiThrTree p)
 {
     if (p)
     {
-        InThreading(p->lchild);
-        if (!p->lchild)
+        InThreading(p->lchild); /* 递归左子树线索化 */
+        if (!p->lchild)         /* 没有左孩子 */
         {
-            p->LTag = Thread;
-            p->lchild = pre;
+            p->LTag = Thread; /* 前驱线索 */
+            p->lchild = pre;  /* 左孩子指针指向前驱 */
         }
-        if (!pre->rchild)
+        if (!pre->rchild) /* 前驱没有右孩子 */
         {
-            pre->RTag = Thread; /*  */
+            pre->RTag = Thread; /*后继线索  */
             pre->rchild = p;    /* 前驱右孩子指针指向后继（当前节点P） */
         }
         pre = p;                /* 保持pre指向p的前驱 */
         InThreading(p->rchild); /* 递归右子树线索化 */
     }
+}
+
+/* T指向头结点，头结点左链lchild指向根结点，头结点右链rchild指向中序遍历的最后一个结点。中序遍历二叉线索链表表示的二叉树T */
+typedef int Status;
+char OK;
+
+Status InOrderTraverse_Thr(BiThrTree T)
+{
+    BiThrTree p;
+    p = T->lchild; /* p指向根节点 */
+    while (p != T) /* 当为空树或者遍历结束时，p == T */
+    {
+        while (p->LTag == Link) /* 当LTag == 0 时循环到中序序列第一个结点 */
+        {
+            p = p->lchild;
+        }
+        printf("%c", p->data); /* 打印结点，也可改至其他操作 */
+        while (p->RTag == Thread && p->rchild != T)
+        {
+            p = p->rchild;
+            printf("%c", p->data);
+        }
+        p = p->rchild; /* p进入到其右子树根 */
+    }
+    return OK;
 }
