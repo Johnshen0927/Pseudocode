@@ -13,7 +13,6 @@ typedef struct
 } PTree;
 
 /* 树的孩子表示法结构定义 */
-#define MAX_TREE_SIZE 100;
 typedef struct CTNode /* 孩子结点 */
 {
     int child;
