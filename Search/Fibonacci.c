@@ -4,7 +4,7 @@ int Fibonacci_Search(int *a, int n, int key)
 {
     int low, high, mid, i, k;
     low = 1;  /* 定义最低下标为记录首位 */
-    high = n; /* 定义最高下表为记录末尾 */
+    high = n; /* 定义最高下标为记录末尾 */
     k = 0;
     while (n > F[k] - 1) /* 计算n位于斐波那契数列的位置 */
     {
