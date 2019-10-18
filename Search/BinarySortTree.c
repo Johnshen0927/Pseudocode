@@ -102,7 +102,7 @@ Status Delete(BiTree *p)
         {
             q->lchild = s->lchild; /* 重接q的左子树 */
         }
-        free(s);
+        free(s); 
     }
     return 1;
 }
