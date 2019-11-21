@@ -1,4 +1,3 @@
-/* 对顺序表L做直接插入排序 */
 #include "Basic.c";
 
 void InsertSort(Sqlist *L){

@@ -1,6 +1,5 @@
 #include "Basic.c";
 
-/* 对顺序表L做简单选择排序 */
 void SelectionSort(Sqlist *L)
 {
     int i, j, min;
