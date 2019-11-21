@@ -16,7 +16,7 @@ void SelectionSort(Sqlist *L)
         }
         if (i != min) /* 退出内循环后，若min值发生变化，不为初始得i值*/
         {
-            swap(L, i, min); /* 交换l->r[i]和L->r[min]的值 */
+            swap(L, i, min); /* 交换L->r[i]和L->r[min]的值 */
         }
     }
 }
