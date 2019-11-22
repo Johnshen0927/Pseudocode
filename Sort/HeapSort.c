@@ -4,10 +4,20 @@ void HeapAdjust(Sqlist *L, int s, int m) /* 构建从s....m的大顶堆 */
 {
     int temp, j;
     temp = L->r[s];
-    for (j = 2*s; j <= m; j *= 2)
+    for (j = 2 * s; j <= m; j *= 2) /* 沿关键字较大的那个孩子结点向下筛选 */
     {
-        
+        if (j < m && L->r[j] < L->r[j + 1])
+        {
+            ++j; /* j为关键字中较大结点下标 */
+        }
+        if (temp >= L->r[j])
+        {
+            break; /* 应当插入到r[s]的位置上 */
+        }
+        L->r[s] = L->r[j];
+        s = j;
     }
+    L->r[s] = temp; /* 插入 */
 }
 void HeapSort(Sqlist *L)
 {
