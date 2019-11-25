@@ -1,6 +1,6 @@
 #include "Basic.c"
 
-/* 交换顺序表中子表的记录，使pivot的记录到位，并返回其所在的位置，并使得pivot前的记录不大于它，pivot后的记录不小于它 */
+/* 交换顺序表中子表的记录，使pivot的记录到位，并返回其所在的位置，且使得pivot前的记录不大于它，pivot后的记录不小于它 */
 int Partition(Sqlist *L, int low, int high)
 {
     int pivotkey;         /* pivot下标对应的数组值 */
